@@ -1,0 +1,7 @@
+{
+  "parser": "babel",
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "endOfLine": "lf"
+}
