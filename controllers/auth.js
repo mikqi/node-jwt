@@ -54,6 +54,8 @@ module.exports.handleLogin = (req, res) => {
 
 module.exports.handleGetUser = (req, res) => {
   res.json({
-    message: 'Get User',
+    data: {
+      ...req.user,
+    },
   })
 }
