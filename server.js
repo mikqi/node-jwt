@@ -20,6 +20,14 @@ app.get('/', (req, res) => {
 
 app.use('/api', require('./routes/api'))
 
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({
+      message: 'Invalid token.',
+    })
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`App run on http://localhost:${PORT}`)
 })
