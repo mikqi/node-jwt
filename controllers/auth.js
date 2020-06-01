@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
 module.exports.handleSignup = (req, res) => {
@@ -36,8 +37,17 @@ module.exports.handleLogin = (req, res) => {
       return res.status(401).json({ message: 'Password invalid' })
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+      },
+      'somesupersecretkeythatnobodycanhaveitjustdeveloperonly!??!!!??!',
+      { expiresIn: '1h' }
+    )
+
     res.status(200).json({
-      data: user,
+      accessToken: token,
     })
   })
 }
