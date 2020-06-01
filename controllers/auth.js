@@ -1,6 +1,26 @@
+const bcrypt = require('bcryptjs')
+const User = require('../models/user')
+
 module.exports.handleSignup = (req, res) => {
-  res.json({
-    message: 'signup',
+  const { name, email, password } = req.body
+  const hashedPassword = bcrypt.hashSync(password, 8)
+
+  const NewUser = new User({
+    name,
+    email,
+    password: hashedPassword,
+  })
+
+  NewUser.save((err) => {
+    if (err) {
+      return res.json({
+        message: err,
+      })
+    }
+
+    res.json({
+      message: `success added user ${name}`,
+    })
   })
 }
 

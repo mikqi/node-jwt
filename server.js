@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
   })
 })
 
+app.use('/api', require('./routes/api'))
+
 app.listen(PORT, () => {
   console.log(`App run on http://localhost:${PORT}`)
 })
