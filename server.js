@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
 const PORT = 3001
@@ -10,6 +11,7 @@ mongoose.connect('mongodb://localhost:27017/node-jwt', {
   useUnifiedTopology: true,
 })
 
+app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
